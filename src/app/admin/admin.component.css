@@ -1,0 +1,30 @@
+
+.card-header {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.table {
+  border-radius: 8px;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+}
+
+.spinner-border {
+  margin: auto;
+  display: block;
+  margin-top: 20px;
+}
+.card {
+  border-radius: 10px;
+}
+
+.modal-content {
+  border-radius: 10px;
+}
+
+.table {
+  background: #f8f9fa;
+}

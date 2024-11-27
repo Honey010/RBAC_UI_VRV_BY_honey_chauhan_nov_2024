@@ -1,0 +1,122 @@
+<div class="card mt-4">
+  <h4 class="card-header">Admin Panel</h4>
+  <div class="card-body">
+    <p>This page is accessible <u>only by administrators</u>.</p>
+
+    <button
+      class="btn btn-success mb-3"
+      data-bs-toggle="modal"
+      data-bs-target="#userModal"
+      (click)="createRole()"
+      *ngIf="!isNewRole"
+    >
+      Add Role
+    </button>
+    <table class="table table-bordered" *ngIf="isNewRole">
+      <thead>
+        <tr>
+          <th>New </th>
+          <th>Role</th>
+          <th>Read</th>
+          <th>Write</th>
+          <th>Delete</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td>
+            <div><input type="text" [(ngModel)]="tempNewRole.role"></div>
+          </td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="tempNewRole.permissions.read" [checked]="tempNewRole.permissions.read">
+              <span class="slider round"></span>
+            </label>
+          </td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="tempNewRole.permissions.write" [checked]="tempNewRole.permissions.write">
+              <span class="slider round"></span>
+            </label>
+          </td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="tempNewRole.permissions.delete" [checked]="tempNewRole.permissions.delete">
+              <span class="slider round"></span>
+            </label>
+          </td>
+          <td>
+            <button
+              class="btn btn-success btn-sm me-2"
+              (click)="insertNewRole()"
+            >
+              Insert
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Role</th>
+          <th>Read</th>
+          <th>Write</th>
+          <th>Delete</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let role of roles; let i = index">
+          <td>{{ role.id }}</td>
+          <td>
+            <div *ngIf="editRoleId !== role.id">{{ role.role }}</div>
+            <div *ngIf="editRoleId == role.id"><input type="text" [(ngModel)]="role.role"></div>
+          </td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" [checked]="role.permissions.read" (change)="updateRole(role)">
+              <span class="slider round"></span>
+            </label>
+          </td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" [checked]="role.permissions.write" (change)="updateRole(role)">
+              <span class="slider round"></span>
+            </label>
+          </td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" [checked]="role.permissions.delete" (change)="updateRole(role)">
+              <span class="slider round"></span>
+            </label>
+          </td>
+          <td>
+            <button
+              class="btn btn-warning btn-sm me-2"
+              (click)="editRole(role.id)"
+              *ngIf="editRoleId !== role.id"
+            >
+              Edit
+            </button>
+            <button
+              class="btn btn-success btn-sm me-2"
+              (click)="updateRoleName(role)"
+              *ngIf="editRoleId == role.id"
+            >
+              Update
+            </button>
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="deleteRole(i)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

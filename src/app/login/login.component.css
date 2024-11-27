@@ -1,0 +1,10 @@
+.card {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.btn-light {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  font-weight: bold;
+}

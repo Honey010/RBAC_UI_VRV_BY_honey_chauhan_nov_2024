@@ -1,0 +1,22 @@
+﻿<div class="home-container">
+  <div class="card mt-4 shadow-lg blur-effect">
+    <h4 class="card-header text-center text-white bg-dark">Welcome Home</h4>
+    <div class="card-body text-center">
+      <p class="text-success">You're logged in with Angular 14 & JWT!</p>
+      <p>Your role is: <strong>{{ user.role }}</strong>.</p>
+      <p>This page is accessible by <u>all authenticated users</u>.</p>
+
+      <p class="mb-1 text-danger">Current user from secure API endpoint:</p>
+      <div *ngIf="loading" class="spinner-border spinner-border-sm text-primary"></div>
+      <ul *ngIf="userFromApi" class="list-unstyled mt-2">
+        <li class="text-success">
+          <strong>{{ userFromApi.firstName }} {{ userFromApi.lastName }}</strong>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="footer bg-dark text-white text-center py-3 mt-4">
+    <p class="mb-0">© 2024 Honey Chauhan.</p>
+  </footer>
+</div>

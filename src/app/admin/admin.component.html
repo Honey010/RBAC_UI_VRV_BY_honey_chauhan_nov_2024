@@ -1,0 +1,116 @@
+﻿<div class="card mt-4">
+  <h4 class="card-header">Admin Panel</h4>
+  <div class="card-body">
+    <p>This page is accessible <u>only by administrators</u>.</p>
+
+    <button
+      class="btn btn-success mb-3"
+      data-bs-toggle="modal"
+      data-bs-target="#userModal"
+      (click)="addUser()"
+      *ngIf="!isNewUser"
+    >
+      Add User
+    </button>
+
+    <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+    <table class="table table-bordered" *ngIf="isNewUser">
+      <thead>
+        <tr>
+          <th>New</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td>
+            <div><input type="text" [(ngModel)]="tempUser.firstName"></div>
+          </td>
+          <td>
+            <div><input type="text" [(ngModel)]="tempUser.lastName"></div>
+          </td>
+          <td>
+            <div><input type="text" [(ngModel)]="tempUser.username"></div>
+          </td>
+          <td>
+            <select class="form-select" [(ngModel)]="tempUser.role_id">
+              <option *ngFor="let role of roles" [value]="role.id">{{role.role}}</option>
+            </select>
+          </td>
+          <td>
+            <button
+              class="btn btn-success btn-sm me-2"
+              (click)="insertNewUser()"
+            >
+              Insert
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users; let i = index;">
+          <td>{{ user.id }}</td>
+          <td>
+            <div *ngIf="editUserId !== user.id">{{ user.firstName }}</div>
+            <div *ngIf="editUserId == user.id"><input type="text" [(ngModel)]="user.firstName"></div>
+          </td>
+          <td>
+            <div *ngIf="editUserId !== user.id">{{ user.lastName }}</div>
+            <div *ngIf="editUserId == user.id"><input type="text" [(ngModel)]="user.lastName"></div>
+          </td>
+          <td>
+            <div *ngIf="editUserId !== user.id">{{ user.username }}</div>
+            <div *ngIf="editUserId == user.id"><input type="text" [(ngModel)]="user.username"></div>
+          </td>
+          <td>
+            <select class="form-select" [(ngModel)]="user.role_id" [disabled]="user.role_id == 1">
+              <option *ngFor="let role of roles" [value]="role.id" [selected]="role.id == user.role_id">{{role.role}}</option>
+            </select>
+          </td>
+          <td>
+            <button
+              class="btn btn-warning btn-sm me-2"
+              data-bs-toggle="modal"
+              data-bs-target="#userModal"
+              (click)="editUser(user.id)"
+              *ngIf="editUserId != user.id"
+            >
+              Edit
+            </button>
+            <button
+              class="btn btn-success btn-sm me-2"
+              (click)="updateUser(user)"
+              *ngIf="editUserId == user.id"
+            >
+              Update
+            </button>
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="deleteUser(i)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
